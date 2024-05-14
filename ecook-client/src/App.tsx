@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate,
+} from "react-router-dom";
+import "./App.css";
+
+import { NewRecipePage } from "./pages/NewRecipePage/NewRecipePage";
+import { RecipePage } from "./pages/RecipePage/RecipePage";
+import { Root } from "./pages/Root/Root";
+import { RecipesPage } from "./pages/RecipesPage/RecipesPage";
+import { AllRecipes } from "./pages/AllRecipes/AllRecipes";
+import { FavRecipes } from "./pages/FavRecipes/FavRecipes";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />}>
+      <Route index element={<Navigate to="/recipes" />} />
+      <Route path="/recipes" element={<RecipesPage />}>
+        <Route index element={<Navigate to="/recipes/all" />} />
+        <Route path="/recipes/all" element={<AllRecipes />} />
+        <Route path="/recipes/fav" element={<FavRecipes />} />
+      </Route>
+      <Route path="/recipes/new" element={<NewRecipePage />} />
+      <Route path="/recipes/:id" element={<RecipePage />} />
+      <Route path="*" element={<Navigate to="/recipes" />} />
+    </Route>
+  )
+);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
