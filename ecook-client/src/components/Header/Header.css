@@ -1,0 +1,36 @@
+.header {
+  height: 10%;
+  background-color: #595959;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Prompt", sans-serif;
+  font-weight: 600;
+  font-size: 2.4rem;
+}
+
+.prefix {
+  color: #f4c90a;
+  font-family: "Sonsie One", sans-serif;
+  font-size: 2.4rem;
+}
+
+.text-yellow {
+  color: rgba(253, 238, 185, 1);
+}
+
+.text-blue {
+  color: rgba(220, 234, 247, 1);
+}
+
+.text-orange {
+  color: rgba(251, 227, 214, 1);
+}
+
+.text-green {
+  color: rgba(217, 242, 208, 1);
+}
+
+.text-pink {
+  color: rgba(248, 228, 246, 1);
+}

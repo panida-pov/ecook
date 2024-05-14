@@ -1,0 +1,33 @@
+.SearchBar {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 2rem;
+  padding: 0.4rem 0.5rem;
+  background-color: #fff;
+}
+
+.SearchBar input {
+  width: 100%;
+  padding-left: 0.1rem;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  font-family: "Patua One", sans-serif;
+  color: #404040;
+}
+
+input:focus {
+  outline: none;
+}
+
+::placeholder {
+  opacity: 0.7;
+}
+
+::-ms-input-placeholder {
+  opacity: 0.7;
+}

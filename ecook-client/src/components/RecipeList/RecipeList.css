@@ -1,0 +1,11 @@
+.recipe-list {
+  margin: 2rem 0rem;
+  padding: 0rem 1.3rem;
+  max-height: 25rem;
+  overflow-y: auto;
+}
+
+.search-recipe {
+  width: 70%;
+  margin: 0 auto;
+}

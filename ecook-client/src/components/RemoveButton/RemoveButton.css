@@ -1,0 +1,7 @@
+.clearButton {
+  opacity: 0.6;
+}
+
+.clearButton:hover {
+  opacity: 1;
+}

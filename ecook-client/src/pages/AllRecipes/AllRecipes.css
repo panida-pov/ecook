@@ -1,0 +1,25 @@
+.recipe-content {
+  padding: 3rem 4rem;
+  width: 100%;
+}
+
+.add-recipe {
+  width: 70%;
+  margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  border-radius: 8px;
+  background: transparent;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(127, 127, 127, 0.4);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(127, 127, 127, 0.7);
+}
