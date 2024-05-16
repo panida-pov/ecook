@@ -1,8 +1,10 @@
+import React from "react";
 import "./Dropdown.css";
+import { RecipeAction } from "../../contexts/RecipeContext";
 
 type DropdownProps = {
   state: number;
-  setState: (state: number) => void;
+  setState: (state: number) => void | React.Dispatch<RecipeAction>;
 };
 
 export const Dropdown = (props: DropdownProps) => {
