@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { SampleRecipe } from "../../utils/data";
+import { RecipeListDto } from "../../utils/data";
 import { Recipe } from "../Recipe/Recipe";
 import { Searchbar } from "../Searchbar/Searchbar";
 import "./RecipeList.css";
 
 type RecipeListProps = {
-  recipes: Array<SampleRecipe>;
+  recipes: Array<RecipeListDto>;
   placeHolder: string;
 };
 

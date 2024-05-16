@@ -7,9 +7,9 @@ import {
 import "./RecipesPage.css";
 import { useContext, useEffect, useState } from "react";
 import { styles } from "../../utils/styles";
-import { SampleRecipe, sampleRecipes } from "../../utils/data";
-import { AllRecipesContext } from "./AllRecipesContext";
-import { LabelsContext } from "../Root/LabelsContext";
+import { RecipeListDto, sampleRecipeLists } from "../../utils/data";
+import { LabelsContext } from "../../contexts/LabelsContext";
+import { RecipeListsContext } from "../../contexts/RecipeListsContext";
 
 // let counter = 0;
 export const RecipesPage = () => {
@@ -31,7 +31,7 @@ export const RecipesPage = () => {
   }, [labels, queryLabel, searchParams, setSearchParams]);
 
   const [allRecipes, setAllRecipes] =
-    useState<Array<SampleRecipe>>(sampleRecipes);
+    useState<Array<RecipeListDto>>(sampleRecipeLists);
 
   const toggleFav = (id: number) => {
     const updatedRecipes = allRecipes.map((recipe) => {
@@ -44,7 +44,7 @@ export const RecipesPage = () => {
     setAllRecipes(updatedRecipes);
   };
 
-  const labeledRecipes: Array<SampleRecipe> =
+  const labeledRecipes: Array<RecipeListDto> =
     queryLabel === "all"
       ? allRecipes
       : allRecipes.filter((recipe) => recipe.labels.includes(queryLabel));
@@ -75,11 +75,11 @@ export const RecipesPage = () => {
             FAVORITES
           </NavLink>
         </div>
-        <AllRecipesContext.Provider
+        <RecipeListsContext.Provider
           value={{ labeledRecipes, toggleFav, theme }}
         >
           <Outlet />
-        </AllRecipesContext.Provider>
+        </RecipeListsContext.Provider>
       </div>
       <div className="labels-container">
         {labels.map((label, index) => {

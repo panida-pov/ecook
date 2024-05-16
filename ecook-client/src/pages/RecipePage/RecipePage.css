@@ -24,6 +24,7 @@
 }
 
 .button:hover {
+  border: transparent;
   color: #404040;
   background-color: #ffeb97;
 }
@@ -82,54 +83,6 @@ td {
 .text-highlight {
   color: rgba(244, 201, 10, 1);
   font-weight: 600;
-}
-
-.dropbtn {
-  height: 1.5rem;
-  width: 1.5rem;
-  background-color: #ffeb97;
-  color: #404040;
-  font-size: 1rem;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 4rem;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  margin: 0;
-  padding: 0;
-  height: fit-content;
-  max-height: 10rem;
-  overflow-y: auto;
-}
-
-.dropdown-content li {
-  color: #404040;
-  padding: 0.3rem 0.8rem;
-  display: block;
-  font-size: 0.85rem;
-}
-
-.dropdown-content li:hover {
-  background-color: #f1f1f1;
-  cursor: pointer;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: rgba(244, 201, 10, 1);
 }
 
 .methods {

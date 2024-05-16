@@ -4,7 +4,8 @@ import ModeEditOutlinedIcon from "@mui/icons-material/ModeEditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { SampleSingleRecipe, sampleSingleRecipe } from "../../utils/data";
+import { RecipeDto, sampleRecipe } from "../../utils/data";
+import { Dropdown } from "../../components/Dropdown/Dropdown";
 
 export const RecipePage = () => {
   type RecipeParams = {
@@ -12,22 +13,10 @@ export const RecipePage = () => {
   };
   const { id } = useParams<RecipeParams>();
 
-  const recipe: SampleSingleRecipe = sampleSingleRecipe; //sample data
+  const recipe: RecipeDto = sampleRecipe; //sample data
 
   const navigate = useNavigate();
   const [servings, setServings] = useState<number>(recipe.servings);
-
-  const renderServings = (range: number) => {
-    const lists = [];
-    for (let i = 1; i <= range; i++) {
-      lists.push(
-        <li key={i} onClick={() => setServings(i)}>
-          {i}
-        </li>
-      );
-    }
-    return lists;
-  };
 
   const renderMethods = () => {
     return recipe.methods.map((method, index) => {
@@ -64,10 +53,7 @@ export const RecipePage = () => {
           <h3>Ingredients</h3>
           <div>
             For &nbsp;
-            <div className="dropdown">
-              <button className="dropbtn">{servings}</button>
-              <ul className="dropdown-content">{renderServings(10)}</ul>
-            </div>
+            <Dropdown state={servings} setState={setServings} />
             &nbsp; Servings
           </div>
           <table>

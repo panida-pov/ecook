@@ -38,7 +38,7 @@ export const Searchbar = (props: SearchbarProps) => {
           props.setSearch(target.value.toLowerCase());
         }}
       ></input>
-      <RemoveButton type="submit" onClick={() => props.setSearch("")} />
+      <RemoveButton submit={true} onClick={() => props.setSearch("")} />
     </form>
   );
 };

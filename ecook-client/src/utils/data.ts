@@ -1,11 +1,11 @@
-export type SampleRecipe = {
+export type RecipeListDto = {
   id: number;
   name: string;
   favorite: boolean;
   labels: string[];
 };
 
-export const sampleRecipes: Array<SampleRecipe> = [
+export const sampleRecipeLists: Array<RecipeListDto> = [
   {
     id: 1,
     name: "Teriyaki chicken",
@@ -32,7 +32,7 @@ export const sampleRecipes: Array<SampleRecipe> = [
   },
 ];
 
-export type SampleSingleRecipe = {
+export type RecipeDto = {
   id: number;
   name: string;
   favorite: boolean;
@@ -45,12 +45,12 @@ export type SampleSingleRecipe = {
   }[];
   methods: string[];
 };
-export const sampleSingleRecipe: SampleSingleRecipe = {
+export const sampleRecipe: RecipeDto = {
   id: 1,
   name: "Teriyaki chicken",
   favorite: true,
   labels: ["asian"],
-  servings: 1,
+  servings: 2,
   ingredients: [
     {
       name: "soy sauce",
@@ -63,7 +63,7 @@ export const sampleSingleRecipe: SampleSingleRecipe = {
       unit: "tbsp",
     },
     {
-      name: "water",
+      name: "boil water",
       amount: 1,
       unit: "tbsp",
     },

@@ -1,9 +1,9 @@
 import { RecipeList } from "../../components/RecipeList/RecipeList";
 import "./FavRecipes.css";
 import { useContext } from "react";
-import { AllRecipesContext } from "../RecipesPage/AllRecipesContext";
+import { RecipeListsContext } from "../../contexts/RecipeListsContext";
 export const FavRecipes = () => {
-  const { labeledRecipes } = useContext(AllRecipesContext);
+  const { labeledRecipes } = useContext(RecipeListsContext);
 
   return (
     <div className="recipe-content">

@@ -4,16 +4,16 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { LuChefHat } from "react-icons/lu";
 import { styles } from "../../utils/styles";
 import { useContext } from "react";
-import { AllRecipesContext } from "../../pages/RecipesPage/AllRecipesContext";
-import { SampleRecipe } from "../../utils/data";
+import { RecipeListsContext } from "../../contexts/RecipeListsContext";
+import { RecipeListDto } from "../../utils/data";
 import { useNavigate } from "react-router-dom";
 
 type RecipeProps = {
-  recipe: SampleRecipe;
+  recipe: RecipeListDto;
 };
 
 export const Recipe = (props: RecipeProps) => {
-  const { toggleFav, theme } = useContext(AllRecipesContext);
+  const { toggleFav, theme } = useContext(RecipeListsContext);
   const navigate = useNavigate();
 
   return (
