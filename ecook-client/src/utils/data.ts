@@ -1,3 +1,11 @@
+export const sampleLabels: Array<string> = [
+  "all",
+  "thai",
+  "asian",
+  "western",
+  "dessert",
+];
+
 export type RecipeListDto = {
   id: number;
   name: string;
@@ -32,19 +40,18 @@ export const sampleRecipeLists: Array<RecipeListDto> = [
   },
 ];
 
+export type Ingredient = { amount: number | null; unit: string; name: string };
+
 export type RecipeDto = {
-  id: number;
+  id?: number;
   name: string;
   favorite: boolean;
   labels: string[];
   servings: number;
-  ingredients: {
-    name: string;
-    amount: number;
-    unit: string;
-  }[];
+  ingredients: Array<Ingredient>;
   methods: string[];
 };
+
 export const sampleRecipe: RecipeDto = {
   id: 1,
   name: "Teriyaki chicken",
