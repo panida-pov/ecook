@@ -1,30 +1,55 @@
-import { IoCaretBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { RecipeForm } from "../../components/RecipeForm/RecipeForm";
-import { useReducer } from "react";
-import {
-  RecipeContext,
-  recipeInitialState,
-  recipeReducer,
-  recipeSampleState,
-} from "../../contexts/RecipeContext";
+
+import "./NewRecipePage.css";
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
+import { useEffect, useState } from "react";
+import { RecipeDto } from "../../utils/data";
 
 export const NewRecipePage = () => {
-  // const [recipeState, dispatch] = useReducer(recipeReducer, recipeInitialState);
-  const [recipeState, dispatch] = useReducer(recipeReducer, recipeSampleState);
   const navigate = useNavigate();
+  const [newRecipe, setNewRecipe] = useState<RecipeDto>({
+    name: "",
+    favorite: false,
+    labels: [],
+    servings: 1,
+    ingredients: [
+      {
+        name: "soy sauce",
+        amount: 1 / 4,
+        unit: "cup",
+      },
+      {
+        name: "brown sugar",
+        amount: 3,
+        unit: "tbsp",
+      },
+      {
+        name: "boil water",
+        amount: 1,
+        unit: "tbsp",
+      },
+    ],
+    methods: ["Boil the water", "Chop garlics"],
+  });
+
+  const [saving, setSaving] = useState<boolean>(false);
+
+  useEffect(() => console.log(newRecipe), [newRecipe]);
 
   return (
     <div className="outer-container recipe-page">
       <div className="button-container">
-        <button className="button" onClick={() => navigate("/recipes/all")}>
-          <IoCaretBack style={{ fontSize: "1.1rem" }} />
-          BACK TO RECIPES
-        </button>
+        <h2>
+          <TipsAndUpdatesIcon />
+          &nbsp; New Recipe
+        </h2>
         <div className="button-group">
-          <button className="button">CANCEL</button>
-          <button className="button">
+          <button className="button" onClick={() => navigate("/recipes/all")}>
+            CANCEL
+          </button>
+          <button className="button" onClick={() => setSaving(!saving)}>
             SAVE
             <SaveOutlinedIcon
               style={{ fontSize: "1.1rem", marginLeft: "0.2rem" }}
@@ -32,9 +57,11 @@ export const NewRecipePage = () => {
           </button>
         </div>
       </div>
-      <RecipeContext.Provider value={{ recipeState, dispatch }}>
-        <RecipeForm />
-      </RecipeContext.Provider>
+      <RecipeForm
+        saving={saving}
+        recipe={newRecipe}
+        updateRecipe={setNewRecipe}
+      />
     </div>
   );
 };

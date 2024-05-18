@@ -1,13 +1,12 @@
-import { Ingredient, RecipeDto } from "../../utils/data";
+import { RecipeForm } from "../../utils/data";
+import { v4 as uuidv4 } from "uuid";
 
 export const enum FORM_ACTION {
   TOGGLE_FAV,
   UPDATE_LABELS,
   UPDATE_SERVINGS,
   ADD_INGREDIENT,
-  UPDATE_INGREDIENT,
   REMOVE_INGREDIENT,
-  REMOVE,
   ADD_METHOD,
   REMOVE_METHOD,
 }
@@ -19,29 +18,23 @@ type UPDATE_SERVINGS = {
   payload: number;
 };
 type ADD_INGREDIENT = { type: FORM_ACTION.ADD_INGREDIENT };
-type UPDATE_INGREDIENT = {
-  type: FORM_ACTION.UPDATE_INGREDIENT;
-  payload: Array<Ingredient>;
-};
 type REMOVE_INGREDIENT = {
   type: FORM_ACTION.REMOVE_INGREDIENT;
-  payload: { index: number; ingredients: Array<Ingredient> };
+  payload: string;
 };
-
 type ADD_METHOD = { type: FORM_ACTION.ADD_METHOD };
-type REMOVE_METHOD = { type: FORM_ACTION.REMOVE_METHOD; payload: number };
+type REMOVE_METHOD = { type: FORM_ACTION.REMOVE_METHOD; payload: string };
 
 export type FormAction =
   | TOGGLE_FAV
   | UPDATE_LABELS
   | UPDATE_SERVINGS
   | ADD_INGREDIENT
-  | UPDATE_INGREDIENT
   | REMOVE_INGREDIENT
   | ADD_METHOD
   | REMOVE_METHOD;
 
-export const formReducer = (recipe: RecipeDto, action: FormAction) => {
+export const formReducer = (recipe: RecipeForm, action: FormAction) => {
   switch (action.type) {
     case FORM_ACTION.TOGGLE_FAV: {
       return { ...recipe, favorite: !recipe.favorite };
@@ -75,24 +68,39 @@ export const formReducer = (recipe: RecipeDto, action: FormAction) => {
         ...recipe,
         ingredients: [
           ...recipe.ingredients,
-          { name: "", amount: null, unit: "" },
+          {
+            id: uuidv4(),
+            value: { name: "", amount: null, unit: "" },
+          },
         ],
       };
     }
 
-    case FORM_ACTION.UPDATE_INGREDIENT: {
+    case FORM_ACTION.REMOVE_INGREDIENT: {
+      const newIngredients = recipe.ingredients.filter(
+        (ingredient) => ingredient.id !== action.payload
+      );
+      return { ...recipe, ingredients: newIngredients };
+    }
+
+    case FORM_ACTION.ADD_METHOD: {
       return {
         ...recipe,
-        ingredients: [...action.payload],
+        methods: [
+          ...recipe.methods,
+          {
+            id: uuidv4(),
+            value: "",
+          },
+        ],
       };
     }
 
-    case FORM_ACTION.REMOVE_INGREDIENT: {
-      const newIngredients = [
-        ...action.payload.ingredients.slice(0, action.payload.index),
-        ...action.payload.ingredients.slice(action.payload.index + 1),
-      ];
-      return { ...recipe, ingredients: newIngredients };
+    case FORM_ACTION.REMOVE_METHOD: {
+      const newMethods = recipe.methods.filter(
+        (method) => method.id !== action.payload
+      );
+      return { ...recipe, methods: newMethods };
     }
 
     default:

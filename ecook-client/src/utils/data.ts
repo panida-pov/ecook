@@ -52,6 +52,26 @@ export type RecipeDto = {
   methods: string[];
 };
 
+export type UniqueIngredient = {
+  id: string;
+  value: Ingredient;
+};
+
+export type UniqueMethod = {
+  id: string;
+  value: string;
+};
+
+export type RecipeForm = {
+  id?: number;
+  name: string;
+  favorite: boolean;
+  labels: string[];
+  servings: number;
+  ingredients: Array<UniqueIngredient>;
+  methods: Array<UniqueMethod>;
+};
+
 export const sampleRecipe: RecipeDto = {
   id: 1,
   name: "Teriyaki chicken",
