@@ -4,7 +4,7 @@ import { RecipeAction } from "../../contexts/RecipeContext";
 
 type DropdownProps = {
   state: number;
-  setState: (state: number) => void | React.Dispatch<RecipeAction>;
+  setState: (state: number) => void;
 };
 
 export const Dropdown = (props: DropdownProps) => {
@@ -21,7 +21,7 @@ export const Dropdown = (props: DropdownProps) => {
   };
   return (
     <div className="dropdown">
-      <button className="dropbtn">{props.state}</button>
+      <button className="dropbtn">{props.state ?? 1}</button>
       <ul className="dropdown-content">{renderServings(10)}</ul>
     </div>
   );
