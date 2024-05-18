@@ -41,7 +41,10 @@ export const RecipePage = () => {
             DELETE
             <DeleteOutlineOutlinedIcon style={{ fontSize: "1.1rem" }} />
           </button>
-          <button className="button">
+          <button
+            className="button"
+            onClick={() => navigate(`/recipes/${id}/edit`)}
+          >
             EDIT
             <ModeEditOutlinedIcon style={{ fontSize: "1.1rem" }} />
           </button>
@@ -62,7 +65,7 @@ export const RecipePage = () => {
                 return (
                   <tr key={name}>
                     <td className="text-highlight">
-                      {((amount / recipe.servings) * servings)
+                      {(((amount ?? 0) / recipe.servings) * servings)
                         .toFixed(2)
                         .replace(/[.,]00$/, "")}
                       &nbsp; &nbsp;
