@@ -1,3 +1,6 @@
+import { RecipeDto } from "../pages/RecipePage/type";
+import { RecipeListDto } from "../pages/RecipesPage/type";
+
 export const sampleLabels: Array<string> = [
   "all",
   "thai",
@@ -5,13 +8,6 @@ export const sampleLabels: Array<string> = [
   "western",
   "dessert",
 ];
-
-export type RecipeListDto = {
-  id: number;
-  name: string;
-  favorite: boolean;
-  labels: string[];
-};
 
 export const sampleRecipeLists: Array<RecipeListDto> = [
   {
@@ -39,38 +35,6 @@ export const sampleRecipeLists: Array<RecipeListDto> = [
     labels: ["dessert"],
   },
 ];
-
-export type Ingredient = { amount: number | null; unit: string; name: string };
-
-export type RecipeDto = {
-  id?: number;
-  name: string;
-  favorite: boolean;
-  labels: string[];
-  servings: number;
-  ingredients: Array<Ingredient>;
-  methods: string[];
-};
-
-export type UniqueIngredient = {
-  id: string;
-  value: Ingredient;
-};
-
-export type UniqueMethod = {
-  id: string;
-  value: string;
-};
-
-export type RecipeForm = {
-  id?: number;
-  name: string;
-  favorite: boolean;
-  labels: string[];
-  servings: number;
-  ingredients: Array<UniqueIngredient>;
-  methods: Array<UniqueMethod>;
-};
 
 export const sampleRecipe: RecipeDto = {
   id: 1,
