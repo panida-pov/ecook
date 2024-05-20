@@ -1,65 +1,54 @@
+import "./RecipesPage.css";
 import {
   NavLink,
   Outlet,
   createSearchParams,
   useSearchParams,
 } from "react-router-dom";
-import "./RecipesPage.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import { styles } from "../../utils/styles";
-import { RecipeListDto, sampleRecipeLists } from "../../utils/data";
-import { LabelsContext } from "../../contexts/LabelsContext";
-import { RecipeListsContext } from "../../contexts/RecipeListsContext";
+import { LabelsContext } from "../Root/LabelsContext";
+import {
+  RECIPE_LISTS_ACTIONS,
+  RecipeListsContext,
+  recipeListsInitialState,
+  recipeListsReducer,
+} from "./RecipeListsContext";
 
-// let counter = 0;
 export const RecipesPage = () => {
-  // console.log("counting re-renders", (counter += 1));
-  const [searchParams, setSearchParams] = useSearchParams();
   const { labels } = useContext(LabelsContext);
-  const [queryLabel, setQueryLabel] = useState<string>(
-    searchParams.get("label") || "all"
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [recipeListsState, dispatch] = useReducer(
+    recipeListsReducer,
+    recipeListsInitialState
   );
-  const [theme, setTheme] = useState<number>(labels.indexOf(queryLabel));
 
   useEffect(() => {
-    if (!labels.includes(queryLabel)) {
-      setQueryLabel("all");
-      setTheme(0);
+    const qLabel = searchParams.get("label") || "all";
+    const indexLabel = labels.indexOf(qLabel);
+    if (indexLabel >= 0) {
+      dispatch({ type: RECIPE_LISTS_ACTIONS.SET_LABEL, payload: qLabel });
+      dispatch({ type: RECIPE_LISTS_ACTIONS.SET_THEME, payload: indexLabel });
+    } else {
       searchParams.set("label", "all");
       setSearchParams(searchParams);
     }
-  }, [labels, queryLabel, searchParams, setSearchParams]);
-
-  const [allRecipes, setAllRecipes] =
-    useState<Array<RecipeListDto>>(sampleRecipeLists);
-
-  const toggleFav = (id: number) => {
-    const updatedRecipes = allRecipes.map((recipe) => {
-      if (recipe.id === id) {
-        return { ...recipe, favorite: !recipe.favorite };
-      } else {
-        return recipe;
-      }
-    });
-    setAllRecipes(updatedRecipes);
-  };
-
-  const labeledRecipes: Array<RecipeListDto> =
-    queryLabel === "all"
-      ? allRecipes
-      : allRecipes.filter((recipe) => recipe.labels.includes(queryLabel));
+  }, [labels]);
 
   return (
     <div className="outer-container">
       <div
         className="recipe-container"
         style={{
-          backgroundColor: styles.bgColors[theme] || "rgba(215, 215, 215, 1)",
+          backgroundColor:
+            styles.bgColors[recipeListsState.theme] || "rgba(215, 215, 215, 1)",
         }}
       >
         <div className="menu-container">
           <NavLink
-            to={`/recipes/all?${createSearchParams({ label: queryLabel })}`}
+            to={`/recipes/all?${createSearchParams({
+              label: recipeListsState.label,
+            })}`}
             className={({ isActive }) =>
               isActive ? "menu menu-active" : "menu menu-inactive"
             }
@@ -67,7 +56,9 @@ export const RecipesPage = () => {
             RECIPES
           </NavLink>
           <NavLink
-            to={`/recipes/fav?${createSearchParams({ label: queryLabel })}`}
+            to={`/recipes/fav?${createSearchParams({
+              label: recipeListsState.label,
+            })}`}
             className={({ isActive }) =>
               isActive ? "menu menu-active" : "menu menu-inactive"
             }
@@ -75,9 +66,7 @@ export const RecipesPage = () => {
             FAVORITES
           </NavLink>
         </div>
-        <RecipeListsContext.Provider
-          value={{ labeledRecipes, toggleFav, theme }}
-        >
+        <RecipeListsContext.Provider value={{ recipeListsState, dispatch }}>
           <Outlet />
         </RecipeListsContext.Provider>
       </div>
@@ -92,8 +81,14 @@ export const RecipesPage = () => {
                   styles.bgColors[index] || "rgba(215, 215, 215, 1)",
               }}
               onClick={() => {
-                setQueryLabel(label);
-                setTheme(index);
+                dispatch({
+                  type: RECIPE_LISTS_ACTIONS.SET_LABEL,
+                  payload: label,
+                });
+                dispatch({
+                  type: RECIPE_LISTS_ACTIONS.SET_THEME,
+                  payload: index,
+                });
                 searchParams.set("label", label);
                 setSearchParams(searchParams);
               }}

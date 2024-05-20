@@ -1,8 +1,8 @@
+import "./RecipeList.css";
 import { useState } from "react";
-import { RecipeListDto } from "../../utils/data";
 import { Recipe } from "../Recipe/Recipe";
 import { Searchbar } from "../Searchbar/Searchbar";
-import "./RecipeList.css";
+import { RecipeListDto } from "../../pages/RecipesPage/type";
 
 type RecipeListProps = {
   recipes: Array<RecipeListDto>;

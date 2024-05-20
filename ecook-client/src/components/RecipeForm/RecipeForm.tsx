@@ -1,16 +1,17 @@
 import "./RecipeForm.css";
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
+import { useContext, useEffect, useReducer, useRef } from "react";
 import { AddButton } from "../AddButton/AddButton";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { GiFruitBowl } from "react-icons/gi";
 import { GiCampCookingPot } from "react-icons/gi";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { LabelsContext } from "../../contexts/LabelsContext";
+import { LabelsContext } from "../../pages/Root/LabelsContext";
 import { Dropdown } from "../Dropdown/Dropdown";
-import { RecipeDto, UniqueIngredient, UniqueMethod } from "../../utils/data";
 import { FORM_ACTION, formReducer } from "./formReducer";
 import { v4 as uuidv4 } from "uuid";
+import { UniqueIngredient, UniqueMethod } from "./type";
+import { RecipeDto } from "../../pages/RecipePage/type";
 
 type RecipeFormProps = {
   saving: boolean;

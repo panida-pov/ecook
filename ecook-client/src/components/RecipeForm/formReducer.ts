@@ -1,5 +1,5 @@
-import { RecipeForm } from "../../utils/data";
 import { v4 as uuidv4 } from "uuid";
+import { FormRecipe } from "./type";
 
 export const enum FORM_ACTION {
   TOGGLE_FAV,
@@ -34,7 +34,7 @@ export type FormAction =
   | ADD_METHOD
   | REMOVE_METHOD;
 
-export const formReducer = (recipe: RecipeForm, action: FormAction) => {
+export const formReducer = (recipe: FormRecipe, action: FormAction) => {
   switch (action.type) {
     case FORM_ACTION.TOGGLE_FAV: {
       return { ...recipe, favorite: !recipe.favorite };

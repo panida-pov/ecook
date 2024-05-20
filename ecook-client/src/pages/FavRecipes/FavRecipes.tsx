@@ -1,14 +1,23 @@
-import { RecipeList } from "../../components/RecipeList/RecipeList";
 import "./FavRecipes.css";
+import { RecipeList } from "../../components/RecipeList/RecipeList";
 import { useContext } from "react";
-import { RecipeListsContext } from "../../contexts/RecipeListsContext";
+import { RecipeListsContext } from "../RecipesPage/RecipeListsContext";
+
 export const FavRecipes = () => {
-  const { labeledRecipes } = useContext(RecipeListsContext);
+  const { recipeListsState } = useContext(RecipeListsContext);
 
   return (
     <div className="recipe-content">
       <RecipeList
-        recipes={labeledRecipes.filter((recipe) => recipe.favorite === true)}
+        recipes={recipeListsState.recipeLists.filter((list) => {
+          if (recipeListsState.label === "all") {
+            return list.favorite === true;
+          }
+          return (
+            list.favorite === true &&
+            list.labels.includes(recipeListsState.label)
+          );
+        })}
         placeHolder="Search in favorties"
       />
     </div>

@@ -1,11 +1,10 @@
+import "./NewRecipePage.css";
 import { useNavigate } from "react-router-dom";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { RecipeForm } from "../../components/RecipeForm/RecipeForm";
-
-import "./NewRecipePage.css";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { useEffect, useState } from "react";
-import { RecipeDto } from "../../utils/data";
+import { RecipeDto } from "../RecipePage/type";
 
 export const NewRecipePage = () => {
   const navigate = useNavigate();
@@ -14,24 +13,8 @@ export const NewRecipePage = () => {
     favorite: false,
     labels: [],
     servings: 1,
-    ingredients: [
-      {
-        name: "soy sauce",
-        amount: 1 / 4,
-        unit: "cup",
-      },
-      {
-        name: "brown sugar",
-        amount: 3,
-        unit: "tbsp",
-      },
-      {
-        name: "boil water",
-        amount: 1,
-        unit: "tbsp",
-      },
-    ],
-    methods: ["Boil the water", "Chop garlics"],
+    ingredients: [],
+    methods: [],
   });
 
   const [saving, setSaving] = useState<boolean>(false);

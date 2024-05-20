@@ -1,6 +1,4 @@
-import React from "react";
 import "./Dropdown.css";
-import { RecipeAction } from "../../contexts/RecipeContext";
 
 type DropdownProps = {
   state: number;
