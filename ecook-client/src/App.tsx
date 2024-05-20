@@ -1,3 +1,4 @@
+import "./App.css";
 import {
   Route,
   RouterProvider,
@@ -5,7 +6,6 @@ import {
   createRoutesFromElements,
   Navigate,
 } from "react-router-dom";
-import "./App.css";
 
 import { NewRecipePage } from "./pages/NewRecipePage/NewRecipePage";
 import { RecipePage } from "./pages/RecipePage/RecipePage";
@@ -13,7 +13,6 @@ import { Root } from "./pages/Root/Root";
 import { RecipesPage } from "./pages/RecipesPage/RecipesPage";
 import { AllRecipes } from "./pages/AllRecipes/AllRecipes";
 import { FavRecipes } from "./pages/FavRecipes/FavRecipes";
-import { EditRecipePage } from "./pages/EditRecipePage/EditRecipePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +25,6 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/recipes/new" element={<NewRecipePage />} />
       <Route path="/recipes/:id" element={<RecipePage />} />
-      <Route path="/recipes/:id/edit" element={<EditRecipePage />} />
       <Route path="*" element={<Navigate to="/recipes" />} />
     </Route>
   )
