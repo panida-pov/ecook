@@ -1,4 +1,4 @@
-export type Ingredient = { amount: number | null; unit: string; name: string };
+export type Ingredient = { amount: number; unit: string; name: string };
 
 export type RecipeDto = {
   id?: number;

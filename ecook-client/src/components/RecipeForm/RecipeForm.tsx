@@ -1,5 +1,5 @@
 import "./RecipeForm.css";
-import { useContext, useEffect, useReducer, useRef } from "react";
+import { Ref, useContext, useEffect, useReducer, useRef } from "react";
 import { AddButton } from "../AddButton/AddButton";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { GiFruitBowl } from "react-icons/gi";
@@ -14,46 +14,13 @@ import { UniqueIngredient, UniqueMethod } from "./type";
 import { RecipeDto } from "../../pages/RecipePage/type";
 
 type RecipeFormProps = {
-  saving: boolean;
+  formRef: Ref<HTMLFormElement>;
   recipe: RecipeDto;
   updateRecipe: (recipe: RecipeDto) => void;
 };
 
 export const RecipeForm = (props: RecipeFormProps) => {
-  // update parent recipe state upon saving
-  const { saving, updateRecipe } = props;
-  useEffect(() => {
-    if (saving) {
-      const newIngredients = recipe.ingredients.map((ingredient) => {
-        const amountInput =
-          ingredientInputRef.current[ingredient.id]?.amount?.value;
-        const unitInput =
-          ingredientInputRef.current[ingredient.id]?.unit?.value;
-        const nameInput =
-          ingredientInputRef.current[ingredient.id]?.name?.value;
-
-        return {
-          amount: parseFloat(amountInput || "") || null,
-          unit: unitInput || "",
-          name: nameInput || "",
-        };
-      });
-
-      const newMethods = recipe.methods.map(
-        (method) => methodTextRef.current[method.id]?.value || ""
-      );
-
-      updateRecipe({
-        ...props.recipe,
-        name: nameInputRef.current?.value || "",
-        favorite: recipe.favorite,
-        labels: recipe.labels,
-        servings: recipe.servings,
-        ingredients: newIngredients,
-        methods: newMethods,
-      });
-    }
-  }, [saving]);
+  const { updateRecipe } = props;
 
   // Create unique id for each ingredient
   const uniqueIngredients: Array<UniqueIngredient> =
@@ -109,6 +76,7 @@ export const RecipeForm = (props: RecipeFormProps) => {
       ?.map((label) => (
         <button
           key={label}
+          type="button"
           className={
             recipe.labels?.includes(label)
               ? "label-button active"
@@ -139,8 +107,12 @@ export const RecipeForm = (props: RecipeFormProps) => {
             type="number"
             placeholder="amt"
             autoComplete="off"
-            min="0"
+            min="0.01"
             defaultValue={ingredient.value.amount || ""}
+            required={true}
+            pattern="^\d*(\.\d{0,2})?$"
+            step="0.01"
+            title="Please enter the positive number with up to two decimal places"
           ></input>
           <input
             ref={(element) =>
@@ -155,6 +127,10 @@ export const RecipeForm = (props: RecipeFormProps) => {
             placeholder="unit"
             autoComplete="off"
             defaultValue={ingredient.value.unit}
+            required={true}
+            pattern="^(?!\s*$).+"
+            maxLength={50}
+            title="Please enter the unit within 50 characters"
           ></input>
           <input
             ref={(element) =>
@@ -169,6 +145,10 @@ export const RecipeForm = (props: RecipeFormProps) => {
             placeholder="ingredient"
             autoComplete="off"
             defaultValue={ingredient.value.name}
+            required={true}
+            pattern="^(?!\s*$).+"
+            maxLength={50}
+            title="Please enter the ingredient name within 50 characters"
           ></input>
           <RemoveButton
             onClick={() =>
@@ -202,13 +182,48 @@ export const RecipeForm = (props: RecipeFormProps) => {
           className="method-input"
           defaultValue={method.value}
           placeholder="Enter a method"
+          required={true}
+          maxLength={200}
+          title="Please enter the method within 200 characters"
         ></textarea>
       </div>
     ));
   };
 
+  // update parent recipe state when submit a form
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("form submited!");
+    const newIngredients = recipe.ingredients.map((ingredient) => {
+      const amountInput =
+        ingredientInputRef.current[ingredient.id]?.amount?.value;
+      const unitInput = ingredientInputRef.current[ingredient.id]?.unit?.value;
+      const nameInput = ingredientInputRef.current[ingredient.id]?.name?.value;
+
+      return {
+        amount: parseFloat(amountInput || "") || 0,
+        unit: unitInput?.trim() || "-",
+        name: nameInput?.trim() || "-",
+      };
+    });
+
+    const newMethods = recipe.methods.map(
+      (method) => methodTextRef.current[method.id]?.value || "-"
+    );
+
+    updateRecipe({
+      ...props.recipe,
+      name: nameInputRef.current?.value.trim() || "",
+      favorite: recipe.favorite,
+      labels: recipe.labels,
+      servings: recipe.servings,
+      ingredients: newIngredients,
+      methods: newMethods,
+    });
+  };
+
   return (
-    <div className="dialog">
+    <form className="dialog" ref={props.formRef} onSubmit={handleSubmit}>
       <div className="recipe-header">
         <input
           ref={nameInputRef}
@@ -216,8 +231,13 @@ export const RecipeForm = (props: RecipeFormProps) => {
           placeholder="Enter recipe name"
           autoComplete="off"
           defaultValue={recipe.name}
+          required={true}
+          pattern="^(?!\s*$).+"
+          maxLength={50}
+          title="Please enter the recipe name within 50 characters"
         />
         <button
+          type="button"
           className={recipe.favorite ? "active" : ""}
           onClick={() => dispatch({ type: FORM_ACTION.TOGGLE_FAV })}
         >
@@ -272,6 +292,6 @@ export const RecipeForm = (props: RecipeFormProps) => {
           color="#5f5e5e"
         ></AddButton>
       </div>
-    </div>
+    </form>
   );
 };

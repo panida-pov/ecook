@@ -10,6 +10,7 @@ type AddButtonProps = {
 export const AddButton = (props: AddButtonProps) => {
   return (
     <button
+      type="button"
       className="add-button"
       style={{ backgroundColor: props.bgColor, color: props.color }}
       onClick={props.onClick}

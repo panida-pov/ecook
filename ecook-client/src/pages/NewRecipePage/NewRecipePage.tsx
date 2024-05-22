@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { RecipeForm } from "../../components/RecipeForm/RecipeForm";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RecipeDto } from "../RecipePage/type";
 
 export const NewRecipePage = () => {
@@ -17,7 +17,7 @@ export const NewRecipePage = () => {
     methods: [],
   });
 
-  const [saving, setSaving] = useState<boolean>(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => console.log(newRecipe), [newRecipe]);
 
@@ -32,7 +32,12 @@ export const NewRecipePage = () => {
           <button className="button" onClick={() => navigate("/recipes/all")}>
             CANCEL
           </button>
-          <button className="button" onClick={() => setSaving(!saving)}>
+          <button
+            className="button"
+            onClick={() => {
+              formRef.current?.requestSubmit();
+            }}
+          >
             SAVE
             <SaveOutlinedIcon
               style={{ fontSize: "1.1rem", marginLeft: "0.2rem" }}
@@ -41,7 +46,7 @@ export const NewRecipePage = () => {
         </div>
       </div>
       <RecipeForm
-        saving={saving}
+        formRef={formRef}
         recipe={newRecipe}
         updateRecipe={setNewRecipe}
       />

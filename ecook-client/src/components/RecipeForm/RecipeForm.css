@@ -166,3 +166,8 @@ button.label-button.active {
   margin-top: 0.3rem;
   margin-bottom: 1rem;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

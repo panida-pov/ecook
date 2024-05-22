@@ -70,7 +70,7 @@ export const formReducer = (recipe: FormRecipe, action: FormAction) => {
           ...recipe.ingredients,
           {
             id: uuidv4(),
-            value: { name: "", amount: null, unit: "" },
+            value: { name: "", amount: 0, unit: "" },
           },
         ],
       };

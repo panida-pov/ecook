@@ -1,5 +1,5 @@
 import "./RecipePage.css";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { RecipeForm } from "../../components/RecipeForm/RecipeForm";
@@ -20,7 +20,8 @@ type RecipeParams = {
 export const RecipePage = () => {
   const { id } = useParams<RecipeParams>();
   const [recipeState, dispatch] = useReducer(recipeReducer, recipeSampleState);
-  const { recipe, isEditing, isSaving } = recipeState;
+  const { recipe, isEditing } = recipeState;
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => console.log(recipeState), [recipeState]);
 
@@ -61,9 +62,9 @@ export const RecipePage = () => {
               </button>
               <button
                 className="button"
-                onClick={() =>
-                  dispatch({ type: RECIPE_ACTIONS.SET_SAVING, payload: true })
-                }
+                onClick={() => {
+                  formRef.current?.requestSubmit();
+                }}
               >
                 SAVE
                 <SaveOutlinedIcon
@@ -96,7 +97,7 @@ export const RecipePage = () => {
       {isEditing ? (
         <>
           <RecipeForm
-            saving={isSaving}
+            formRef={formRef}
             recipe={recipe}
             updateRecipe={(newRecipe) =>
               dispatch({
@@ -123,7 +124,7 @@ export const RecipePage = () => {
                     return (
                       <tr key={name}>
                         <td className="text-highlight">
-                          {(((amount ?? 0) / recipe.servings) * servings)
+                          {((amount / recipe.servings) * servings)
                             .toFixed(2)
                             .replace(/[.,]00$/, "")}
                           &nbsp; &nbsp;
