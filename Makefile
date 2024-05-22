@@ -8,10 +8,14 @@ down:
 	docker-compose down
 
 migration-run:
-	docker-compose exec -it to-do-server npm run migration:run
+	(cd ecook-server && npm run migration:run)
+	# For docker
+	# docker-compose exec -it ecook-server npm run migration:run
 
 migration-revert:
-	docker-compose exec -it to-do-server npm run migration:revert
+	(cd ecook-server && npm run migration:revert)
+	# For docker
+	# docker-compose exec -it ecook-server npm run migration:revert
 
 migration-create:
-	(cd server && npm run migration:create ${Arguments})
+	(cd ecook-server && npm run migration:create ${Arguments})
