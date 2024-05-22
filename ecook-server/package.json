@@ -5,6 +5,9 @@
   "scripts": {
     "start": "tsc && node dist/index.js",
     "start:dev": "nodemon ./src/index.ts",
+    "migration:create": "run(){ migrationPath='./src/migration/'; fileName=$1; filePath=$migrationPath$fileName; npx typeorm-ts-node-commonjs migration:create $filePath; }; run",
+    "migration:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
+    "migration:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/data-source.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,7 +17,10 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
