@@ -1,4 +1,4 @@
-export interface UpdateRecipeDto {
+export interface RecipeResponse {
   id: number;
   name: string;
   favorite: boolean;
