@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
-import { CreateRecipeDto } from "../dto/CreateRecipe.dto";
-import { UpdateFavoriteDto } from "../dto/UpdateFavorite.dto";
-import { RecipelistResponse } from "../dto/RecipelistResponse";
-import { RecipeResponse } from "../dto/RecipeResponse.dto";
+import { CreateRecipeDto } from "../dto/recipes/CreateRecipe.dto";
+import { UpdateFavoriteDto } from "../dto/recipes/UpdateFavorite.dto";
+import { RecipelistResponse } from "../dto/recipes/RecipelistResponse.dto";
+import { RecipeResponse } from "../dto/recipes/RecipeResponse.dto";
 import { CustomError } from "../utils/CustomError";
 
 // GET: /api/recipes

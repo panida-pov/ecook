@@ -4,7 +4,7 @@ import {
   validateRecipeIdSchema,
   createRecipeSchema,
   updateFavoriteSchema,
-} from "../utils/ValidationSchemas";
+} from "../schema/RecipeValidationSchemas";
 import { validationHandler } from "../middlewares/validationHandler";
 import {
   getRecipes,

@@ -2,11 +2,11 @@ import { validationResult } from "express-validator";
 import { CustomError } from "../utils/CustomError";
 import { Request, Response, NextFunction } from "express-serve-static-core";
 
-export const validationHandler = (
+export function validationHandler(
   req: Request<never>,
   res: Response,
   next: NextFunction
-) => {
+) {
   const results = validationResult(req);
   if (!results.isEmpty()) {
     const errors = results.array();
@@ -17,4 +17,4 @@ export const validationHandler = (
     return next(new CustomError(messages.join(", "), 400));
   }
   return next();
-};
+}
