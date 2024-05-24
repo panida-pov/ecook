@@ -5,6 +5,7 @@ import { myDataSource } from "./data-source";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { CustomError } from "./utils/CustomError";
 import { Request, Response, NextFunction } from "express-serve-static-core";
+import { labelsRouter } from "./routes/labels";
 
 // establish database connection
 myDataSource
@@ -21,6 +22,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/recipes", recipesRouter);
+app.use("/api/labels", labelsRouter);
 app.all("*", (req: Request, res: Response, next: NextFunction) =>
   next(new CustomError(`Cannot find ${req.url} on the server!`, 404))
 );
