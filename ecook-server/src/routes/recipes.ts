@@ -1,20 +1,57 @@
 import { Router } from "express";
+import { checkSchema } from "express-validator";
 import {
-  createRecipe,
-  deleteRecipeById,
-  getRecipeById,
+  validateRecipeIdSchema,
+  createRecipeSchema,
+  updateFavoriteSchema,
+} from "../utils/ValidationSchemas";
+import { validationHandler } from "../middlewares/validationHandler";
+import {
   getRecipes,
+  createRecipe,
+  getRecipeById,
+  updateRecipe,
+  deleteRecipe,
   updateFavorite,
-  updateRecipeById,
-} from "../handlers/recipes";
+} from "../controllers/recipes.controller";
 
-const recipesRouter = Router();
+export const recipesRouter = Router();
 
 recipesRouter.get("/", getRecipes);
-recipesRouter.post("/", createRecipe);
-recipesRouter.get("/:id", getRecipeById);
-recipesRouter.put("/:id", updateRecipeById);
-recipesRouter.delete("/:id", deleteRecipeById);
-recipesRouter.put("/:id/update-fav", updateFavorite);
 
-export default recipesRouter;
+recipesRouter.post(
+  "/",
+  checkSchema(createRecipeSchema),
+  validationHandler,
+  createRecipe
+);
+
+recipesRouter.get(
+  "/:id",
+  checkSchema(validateRecipeIdSchema),
+  validationHandler,
+  getRecipeById
+);
+
+recipesRouter.put(
+  "/:id",
+  checkSchema(validateRecipeIdSchema),
+  checkSchema(createRecipeSchema),
+  validationHandler,
+  updateRecipe
+);
+
+recipesRouter.delete(
+  "/:id",
+  checkSchema(validateRecipeIdSchema),
+  validationHandler,
+  deleteRecipe
+);
+
+recipesRouter.patch(
+  "/:id/update-fav",
+  checkSchema(validateRecipeIdSchema),
+  checkSchema(updateFavoriteSchema),
+  validationHandler,
+  updateFavorite
+);
