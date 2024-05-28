@@ -8,7 +8,7 @@ export const myDataSource = new DataSource({
   password: "root",
   database: "ecook",
   entities: [__dirname + "/**/*.entity{.ts,.js}"],
-  migrationsRun: true,
+  migrationsRun: false,
   migrations: [__dirname + "/migration/*{.ts,.js}"],
   migrationsTableName: "migration",
   synchronize: false,
