@@ -1,4 +1,4 @@
-export interface RecipeResponse {
+export class RecipeResponse {
   id: number;
   name: string;
   favorite: boolean;

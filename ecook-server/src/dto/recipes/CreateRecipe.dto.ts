@@ -1,4 +1,4 @@
-export interface CreateRecipeDto {
+export class CreateRecipeDto {
   name: string;
   favorite: boolean;
   labels: string[];

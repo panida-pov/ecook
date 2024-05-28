@@ -1,3 +1,3 @@
-export interface UpdateFavoriteDto {
+export class UpdateFavoriteDto {
   favorite: boolean;
 }
