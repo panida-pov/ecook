@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
+import { RecipeEntity } from "./recipe.entity";
 
 @Entity({ name: "ingredients" })
 export class IngredientEntity {
@@ -16,4 +23,8 @@ export class IngredientEntity {
 
   @Column({ name: "recipe_id" })
   recipeId: number;
+
+  @ManyToOne(() => RecipeEntity, (recipe) => recipe.ingredients)
+  @JoinColumn({ name: "recipe_id", referencedColumnName: "id" })
+  recipe: RecipeEntity;
 }
