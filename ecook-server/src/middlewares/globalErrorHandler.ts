@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import { CustomError } from "../utils/CustomError";
+import { QueryFailedError } from "typeorm";
 
 export function globalErrorHandler(
   error: Error,
@@ -13,5 +14,13 @@ export function globalErrorHandler(
       message: error.message,
     });
   }
-  res.status(500).send({ status: 500, message: "Internal server error" });
+  if (error instanceof QueryFailedError) {
+    return res.status(500).send({
+      status: 409,
+      message: error.message,
+    });
+  }
+  res
+    .status(500)
+    .send({ status: 500, message: error.message || "Internal server error" });
 }
