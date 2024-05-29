@@ -1,4 +1,4 @@
-export interface LabelResponse {
+export class LabelResponse {
   id: number;
   name: string;
 }

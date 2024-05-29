@@ -1,3 +1,3 @@
-export interface CreateLabelDto {
+export class CreateLabelDto {
   name: string;
 }
