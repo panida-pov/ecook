@@ -6,6 +6,7 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { CustomError } from "./utils/CustomError";
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import { labelsRouter } from "./routes/labels";
+import cors from "cors";
 
 // establish database connection
 myDataSource
@@ -20,6 +21,7 @@ myDataSource
 // create and setup express app
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/api/recipes", recipesRouter);
 app.use("/api/labels", labelsRouter);
