@@ -20,7 +20,7 @@ export const Dropdown = (props: DropdownProps) => {
   return (
     <div className="dropdown">
       <button className="dropbtn">{props.state ?? 1}</button>
-      <ul className="dropdown-content">{renderServings(10)}</ul>
+      <ul className="dropdown-content">{renderServings(20)}</ul>
     </div>
   );
 };
