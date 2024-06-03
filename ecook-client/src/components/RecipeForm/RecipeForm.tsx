@@ -1,12 +1,12 @@
 import "./RecipeForm.css";
-import { Ref, useContext, useEffect, useReducer, useRef } from "react";
+import { Ref, useContext, useReducer, useRef } from "react";
 import { AddButton } from "../AddButton/AddButton";
 import { RemoveButton } from "../RemoveButton/RemoveButton";
 import { GiFruitBowl } from "react-icons/gi";
 import { GiCampCookingPot } from "react-icons/gi";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { LabelsContext } from "../../pages/Root/LabelsContext";
+import { LabelsContext } from "../../contexts/LabelsContext";
 import { Dropdown } from "../Dropdown/Dropdown";
 import { FORM_ACTION, formReducer } from "./formReducer";
 import { v4 as uuidv4 } from "uuid";
@@ -108,6 +108,7 @@ export const RecipeForm = (props: RecipeFormProps) => {
             placeholder="amt"
             autoComplete="off"
             min="0.01"
+            max="9999"
             defaultValue={ingredient.value.amount || ""}
             required={true}
             pattern="^\d*(\.\d{0,2})?$"
@@ -193,7 +194,6 @@ export const RecipeForm = (props: RecipeFormProps) => {
   // update parent recipe state when submit a form
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("form submited!");
     const newIngredients = recipe.ingredients.map((ingredient) => {
       const amountInput =
         ingredientInputRef.current[ingredient.id]?.amount?.value;

@@ -1,6 +1,5 @@
 import React, { createContext } from "react";
-import { sampleRecipeLists } from "../../utils/data";
-import { RecipeListDto } from "./type";
+import { RecipeListDto } from "../pages/RecipesPage/type";
 
 export type RecipeListsState = {
   isLoading: boolean;
@@ -75,7 +74,7 @@ export const recipeListsReducer = (
 export const recipeListsInitialState = {
   isLoading: false,
   error: "",
-  recipeLists: sampleRecipeLists,
+  recipeLists: [],
   label: "all",
   theme: 0,
 };

@@ -1,7 +1,7 @@
 import "./FavRecipes.css";
 import { RecipeList } from "../../components/RecipeList/RecipeList";
 import { useContext } from "react";
-import { RecipeListsContext } from "../RecipesPage/RecipeListsContext";
+import { RecipeListsContext } from "../../contexts/RecipeListsContext";
 
 export const FavRecipes = () => {
   const { recipeListsState } = useContext(RecipeListsContext);

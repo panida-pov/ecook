@@ -2,7 +2,7 @@ import "./AllRecipes.css";
 import { useContext } from "react";
 import { AddButton } from "../../components/AddButton/AddButton";
 import { RecipeList } from "../../components/RecipeList/RecipeList";
-import { RecipeListsContext } from "../RecipesPage/RecipeListsContext";
+import { RecipeListsContext } from "../../contexts/RecipeListsContext";
 import { useNavigate } from "react-router-dom";
 
 export const AllRecipes = () => {
