@@ -4,7 +4,7 @@ export const enum NEW_RECIPE_ACTIONS {
   UPDATE_RECIPE,
   SET_SAVE,
   SAVE_BEGIN,
-  SAVE_SUCCESS,
+  SAVE_END,
   OPEN_MODAL,
   CLOSE_MODAL,
 }
@@ -15,7 +15,7 @@ type UPDATE_RECIPE = {
 };
 type SET_SAVE = { type: NEW_RECIPE_ACTIONS.SET_SAVE };
 type SAVE_BEGIN = { type: NEW_RECIPE_ACTIONS.SAVE_BEGIN };
-type SAVE_SUCCESS = { type: NEW_RECIPE_ACTIONS.SAVE_SUCCESS };
+type SAVE_END = { type: NEW_RECIPE_ACTIONS.SAVE_END };
 type OPEN_MODAL = { type: NEW_RECIPE_ACTIONS.OPEN_MODAL };
 type CLOSE_MODAL = { type: NEW_RECIPE_ACTIONS.CLOSE_MODAL };
 
@@ -23,7 +23,7 @@ export type NewRecipeAction =
   | UPDATE_RECIPE
   | SET_SAVE
   | SAVE_BEGIN
-  | SAVE_SUCCESS
+  | SAVE_END
   | OPEN_MODAL
   | CLOSE_MODAL;
 
@@ -51,7 +51,7 @@ export const newRecipeReducer = (
       return { ...newRecipeState, isSaving: true };
     }
 
-    case NEW_RECIPE_ACTIONS.SAVE_SUCCESS: {
+    case NEW_RECIPE_ACTIONS.SAVE_END: {
       return { ...newRecipeState, isSaving: false, save: false };
     }
 

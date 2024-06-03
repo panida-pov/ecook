@@ -13,6 +13,8 @@ import { addRecipe } from "../../utils/api";
 import { isAxiosError } from "axios";
 import { Modal } from "../../components/Modal/Modal";
 import { Loading } from "../../components/Loading/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const NewRecipePage = () => {
   const navigate = useNavigate();
@@ -27,8 +29,23 @@ export const NewRecipePage = () => {
     if (save) {
       dispatch({ type: NEW_RECIPE_ACTIONS.SAVE_BEGIN });
       addRecipe(newRecipe)
-        .then((data) => navigate(`/recipes/${data.id}`))
-        .catch((e) => console.error(isAxiosError(e) ? e.response?.data : e));
+        .then((data) => {
+          toast.success("Successfully created the recipe!", {
+            position: "top-right",
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            navigate(`/recipes/${data.id}`);
+          }, 500);
+        })
+        .catch((e) => {
+          dispatch({ type: NEW_RECIPE_ACTIONS.SAVE_END });
+          toast.error("Error: Cannot create the recipe!", {
+            position: "top-right",
+            autoClose: false,
+          });
+          console.error(isAxiosError(e) ? e.response?.data : e);
+        });
     }
   }, [newRecipe]);
 
@@ -89,6 +106,7 @@ export const NewRecipePage = () => {
           message="create a new recipe"
         />
       )}
+      <ToastContainer />
     </div>
   );
 };

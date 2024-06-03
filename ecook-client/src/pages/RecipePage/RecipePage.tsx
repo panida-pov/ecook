@@ -17,6 +17,8 @@ import { isAxiosError } from "axios";
 import { capitalize } from "../../utils/helper";
 import { Modal } from "../../components/Modal/Modal";
 import { Loading } from "../../components/Loading/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type RecipeParams = {
   id: string;
@@ -36,7 +38,16 @@ export const RecipePage = () => {
         dispatch({ type: RECIPE_ACTIONS.LOAD_SUCCESS, payload: data });
         setServings(data.servings);
       })
-      .catch((e) => console.error(isAxiosError(e) ? e.response?.data : e));
+      .catch((e) => {
+        toast.error("Error: Cannot load the recipe!", {
+          position: "top-right",
+          autoClose: false,
+        });
+        setTimeout(() => {
+          navigate(`/recipes/all`);
+        }, 3000);
+        console.error(isAxiosError(e) ? e.response?.data : e);
+      });
   }, []);
 
   // Call API to update the recipe when recipe state is updated
@@ -46,19 +57,44 @@ export const RecipePage = () => {
       dispatch({ type: RECIPE_ACTIONS.SAVE_BEGIN });
       updateRecipe(parseInt(id ?? "0"), recipe)
         .then(() => {
-          dispatch({ type: RECIPE_ACTIONS.SAVE_SUCCESS });
-          dispatch({ type: RECIPE_ACTIONS.SET_EDIT_MODE, payload: false });
-          setServings(recipe.servings);
+          toast.success("Successfully updated the recipe!", {
+            position: "top-right",
+            autoClose: 1000,
+          });
+          setTimeout(() => {
+            dispatch({ type: RECIPE_ACTIONS.SAVE_END });
+            dispatch({ type: RECIPE_ACTIONS.SET_EDIT_MODE, payload: false });
+            setServings(recipe.servings);
+          }, 500);
         })
-        .catch((e) => console.error(isAxiosError(e) ? e.response?.data : e));
+        .catch((e) => {
+          dispatch({ type: RECIPE_ACTIONS.SAVE_END });
+          toast.error("Error: Cannot update the recipe!", {
+            position: "top-right",
+            autoClose: false,
+          });
+          console.error(isAxiosError(e) ? e.response?.data : e);
+        });
     }
   }, [recipe]);
 
   // Call API to delete recipe
   const handleDeleteRecipe = () => {
     deleteRecipe(parseInt(id ?? "0"))
-      .then(() => navigate("recipes/all"))
-      .catch((e) => console.error(isAxiosError(e) ? e.response?.data : e));
+      .then(() => {
+        toast.success("Successfully deleted the recipe!", {
+          position: "top-right",
+          autoClose: 1000,
+        });
+        setTimeout(() => navigate("recipes/all"), 500);
+      })
+      .catch((e) => {
+        toast.error("Error: Cannot delete the recipe!", {
+          position: "top-right",
+          autoClose: false,
+        });
+        console.error(isAxiosError(e) ? e.response?.data : e);
+      });
   };
 
   // Trigger form submit in RecipeForm (child component)
@@ -215,6 +251,7 @@ export const RecipePage = () => {
           )}
         </>
       )}
+      <ToastContainer />
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const enum RECIPE_ACTIONS {
   SET_EDIT_MODE,
   SET_SAVE,
   SAVE_BEGIN,
-  SAVE_SUCCESS,
+  SAVE_END,
   OPEN_MODAL,
   CLOSE_MODAL,
 }
@@ -18,7 +18,7 @@ type SET_EDIT_MODE = { type: RECIPE_ACTIONS.SET_EDIT_MODE; payload: boolean };
 type UPDATE_RECIPE = { type: RECIPE_ACTIONS.UPDATE_RECIPE; payload: RecipeDto };
 type SET_SAVE = { type: RECIPE_ACTIONS.SET_SAVE };
 type SAVE_BEGIN = { type: RECIPE_ACTIONS.SAVE_BEGIN };
-type SAVE_SUCCESS = { type: RECIPE_ACTIONS.SAVE_SUCCESS };
+type SAVE_END = { type: RECIPE_ACTIONS.SAVE_END };
 type OPEN_MODAL = { type: RECIPE_ACTIONS.OPEN_MODAL };
 type CLOSE_MODAL = { type: RECIPE_ACTIONS.CLOSE_MODAL };
 
@@ -29,13 +29,12 @@ export type RecipeAction =
   | UPDATE_RECIPE
   | SET_SAVE
   | SAVE_BEGIN
-  | SAVE_SUCCESS
+  | SAVE_END
   | OPEN_MODAL
   | CLOSE_MODAL;
 
 export type RecipeState = {
   isLoading: boolean;
-  error: string;
   isEditing: boolean;
   recipe: RecipeDto;
   save: boolean;
@@ -72,7 +71,7 @@ export const recipeReducer = (
       return { ...recipeState, isSaving: true };
     }
 
-    case RECIPE_ACTIONS.SAVE_SUCCESS: {
+    case RECIPE_ACTIONS.SAVE_END: {
       return { ...recipeState, isSaving: false, save: false };
     }
 

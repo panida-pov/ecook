@@ -17,6 +17,8 @@ import {
 import { getRecipelists } from "../../utils/api";
 import { isAxiosError } from "axios";
 import { Loading } from "../../components/Loading/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RecipesPage = () => {
   const { labels } = useContext(LabelsContext);
@@ -32,7 +34,14 @@ export const RecipesPage = () => {
       .then((data) => {
         dispatch({ type: RECIPE_LISTS_ACTIONS.LOAD_SUCCESS, payload: data });
       })
-      .catch((e) => console.error(isAxiosError(e) ? e.response?.data : e));
+      .catch((e) => {
+        dispatch({ type: RECIPE_LISTS_ACTIONS.LOAD_SUCCESS, payload: [] });
+        toast.error("Error: Cannot load the recipes!", {
+          position: "top-right",
+          autoClose: false,
+        });
+        console.error(isAxiosError(e) ? e.response?.data : e);
+      });
 
     const qLabel = searchParams.get("label") || "all";
     const indexLabel = labels.indexOf(qLabel);
@@ -112,6 +121,7 @@ export const RecipesPage = () => {
           );
         })}
       </div>
+      <ToastContainer />
     </div>
   );
 };
