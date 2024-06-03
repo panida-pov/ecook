@@ -7,13 +7,16 @@ import {
 } from "react-router-dom";
 import { useContext, useEffect, useReducer } from "react";
 import { styles } from "../../utils/styles";
-import { LabelsContext } from "../Root/LabelsContext";
+import { LabelsContext } from "../../contexts/LabelsContext";
 import {
   RECIPE_LISTS_ACTIONS,
   RecipeListsContext,
   recipeListsInitialState,
   recipeListsReducer,
-} from "./RecipeListsContext";
+} from "../../contexts/RecipeListsContext";
+import { getRecipelists } from "../../utils/api";
+import { isAxiosError } from "axios";
+import { Loading } from "../../components/Loading/Loading";
 
 export const RecipesPage = () => {
   const { labels } = useContext(LabelsContext);
@@ -24,6 +27,13 @@ export const RecipesPage = () => {
   );
 
   useEffect(() => {
+    dispatch({ type: RECIPE_LISTS_ACTIONS.LOAD_BEGIN });
+    getRecipelists()
+      .then((data) => {
+        dispatch({ type: RECIPE_LISTS_ACTIONS.LOAD_SUCCESS, payload: data });
+      })
+      .catch((e) => console.error(isAxiosError(e) ? e.response?.data : e));
+
     const qLabel = searchParams.get("label") || "all";
     const indexLabel = labels.indexOf(qLabel);
     if (indexLabel >= 0) {
@@ -33,7 +43,7 @@ export const RecipesPage = () => {
       searchParams.set("label", "all");
       setSearchParams(searchParams);
     }
-  }, [labels]);
+  }, []);
 
   return (
     <div className="outer-container">
@@ -66,9 +76,13 @@ export const RecipesPage = () => {
             FAVORITES
           </NavLink>
         </div>
-        <RecipeListsContext.Provider value={{ recipeListsState, dispatch }}>
-          <Outlet />
-        </RecipeListsContext.Provider>
+        {recipeListsState.isLoading ? (
+          <Loading />
+        ) : (
+          <RecipeListsContext.Provider value={{ recipeListsState, dispatch }}>
+            <Outlet />
+          </RecipeListsContext.Provider>
+        )}
       </div>
       <div className="labels-container">
         {labels.map((label, index) => {

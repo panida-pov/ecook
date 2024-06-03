@@ -7,9 +7,10 @@ import { useContext } from "react";
 import {
   RECIPE_LISTS_ACTIONS,
   RecipeListsContext,
-} from "../../pages/RecipesPage/RecipeListsContext";
+} from "../../contexts/RecipeListsContext";
 import { useNavigate } from "react-router-dom";
 import { RecipeListDto } from "../../pages/RecipesPage/type";
+import { updateFavorite } from "../../utils/api";
 
 type RecipeProps = {
   recipe: RecipeListDto;
@@ -26,12 +27,13 @@ export const Recipe = (props: RecipeProps) => {
         {props.recipe.name}
       </span>
       <button
-        onClick={() =>
+        onClick={() => {
           dispatch({
             type: RECIPE_LISTS_ACTIONS.TOGGLE_FAV,
             payload: props.recipe.id,
-          })
-        }
+          });
+          updateFavorite(props.recipe.id, { favorite: !props.recipe.favorite });
+        }}
       >
         {props.recipe.favorite ? (
           <FavoriteIcon
