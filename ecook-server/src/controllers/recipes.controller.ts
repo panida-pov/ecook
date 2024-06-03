@@ -100,7 +100,7 @@ export async function createRecipe(
         name: ingredient.name,
       };
     });
-    result.methods = newMethod.method.split("\n");
+    result.methods = newMethod.method ? newMethod.method.split("\n") : [];
 
     res.status(201).send(result);
   } catch (e) {
@@ -147,7 +147,9 @@ export async function getRecipeById(
         name: ingredient.name,
       };
     });
-    result.methods = recipe.method.method.split("\n");
+    result.methods = recipe.method.method
+      ? recipe.method.method.split("\n")
+      : [];
 
     res.status(200).send(result);
   } catch (e) {
