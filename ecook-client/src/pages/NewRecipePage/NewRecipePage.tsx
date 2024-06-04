@@ -70,12 +70,6 @@ export const NewRecipePage = () => {
             <div className="button-group">
               <button
                 className="button"
-                onClick={() => navigate("/recipes/all")}
-              >
-                CANCEL
-              </button>
-              <button
-                className="button"
                 onClick={() =>
                   dispatch({ type: NEW_RECIPE_ACTIONS.OPEN_MODAL })
                 }
@@ -84,6 +78,12 @@ export const NewRecipePage = () => {
                 <SaveOutlinedIcon
                   style={{ fontSize: "1.1rem", marginLeft: "0.2rem" }}
                 />
+              </button>
+              <button
+                className="button"
+                onClick={() => navigate("/recipes/all")}
+              >
+                CANCEL
               </button>
             </div>
           </div>
@@ -99,6 +99,23 @@ export const NewRecipePage = () => {
           />
         </>
       )}
+      <div className="button-container bottom-button-container">
+        <button
+          className="button bottom-button"
+          onClick={() => dispatch({ type: NEW_RECIPE_ACTIONS.OPEN_MODAL })}
+        >
+          SAVE
+          <SaveOutlinedIcon
+            style={{ fontSize: "1.1rem", marginLeft: "0.2rem" }}
+          />
+        </button>
+        <button
+          className="button bottom-button"
+          onClick={() => navigate("/recipes/all")}
+        >
+          CANCEL
+        </button>
+      </div>
       {modal && (
         <Modal
           closeModal={() => dispatch({ type: NEW_RECIPE_ACTIONS.CLOSE_MODAL })}

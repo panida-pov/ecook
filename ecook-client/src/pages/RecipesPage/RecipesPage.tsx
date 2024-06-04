@@ -63,6 +63,34 @@ export const RecipesPage = () => {
             styles.bgColors[recipeListsState.theme] || "rgba(215, 215, 215, 1)",
         }}
       >
+        <div className="labels-container">
+          {labels.map((label, index) => {
+            return (
+              <button
+                key={index}
+                className="label"
+                style={{
+                  backgroundColor:
+                    styles.bgColors[index] || "rgba(215, 215, 215, 1)",
+                }}
+                onClick={() => {
+                  dispatch({
+                    type: RECIPE_LISTS_ACTIONS.SET_LABEL,
+                    payload: label,
+                  });
+                  dispatch({
+                    type: RECIPE_LISTS_ACTIONS.SET_THEME,
+                    payload: index,
+                  });
+                  searchParams.set("label", label);
+                  setSearchParams(searchParams);
+                }}
+              >
+                {label.toUpperCase()}
+              </button>
+            );
+          })}
+        </div>
         <div className="menu-container">
           <NavLink
             to={`/recipes/all?${createSearchParams({
@@ -92,34 +120,6 @@ export const RecipesPage = () => {
             <Outlet />
           </RecipeListsContext.Provider>
         )}
-      </div>
-      <div className="labels-container">
-        {labels.map((label, index) => {
-          return (
-            <button
-              key={index}
-              className="label"
-              style={{
-                backgroundColor:
-                  styles.bgColors[index] || "rgba(215, 215, 215, 1)",
-              }}
-              onClick={() => {
-                dispatch({
-                  type: RECIPE_LISTS_ACTIONS.SET_LABEL,
-                  payload: label,
-                });
-                dispatch({
-                  type: RECIPE_LISTS_ACTIONS.SET_THEME,
-                  payload: index,
-                });
-                searchParams.set("label", label);
-                setSearchParams(searchParams);
-              }}
-            >
-              {label.toUpperCase()}
-            </button>
-          );
-        })}
       </div>
       <ToastContainer />
     </div>

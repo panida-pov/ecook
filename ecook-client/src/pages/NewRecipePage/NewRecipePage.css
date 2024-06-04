@@ -4,3 +4,12 @@
   display: flex;
   align-items: center;
 }
+
+.bottom-button-container {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.bottom-button {
+  flex-grow: 1;
+}

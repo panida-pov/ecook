@@ -134,17 +134,6 @@ export const RecipePage = () => {
                   <button
                     className="button"
                     onClick={() =>
-                      dispatch({
-                        type: RECIPE_ACTIONS.SET_EDIT_MODE,
-                        payload: false,
-                      })
-                    }
-                  >
-                    CANCEL
-                  </button>
-                  <button
-                    className="button"
-                    onClick={() =>
                       dispatch({ type: RECIPE_ACTIONS.OPEN_MODAL })
                     }
                   >
@@ -152,6 +141,17 @@ export const RecipePage = () => {
                     <SaveOutlinedIcon
                       style={{ fontSize: "1.1rem", marginLeft: "0.2rem" }}
                     />
+                  </button>
+                  <button
+                    className="button"
+                    onClick={() =>
+                      dispatch({
+                        type: RECIPE_ACTIONS.SET_EDIT_MODE,
+                        payload: false,
+                      })
+                    }
+                  >
+                    CANCEL
                   </button>
                   {modal && (
                     <Modal
@@ -211,10 +211,40 @@ export const RecipePage = () => {
                   })
                 }
               ></RecipeForm>
+              <div className="button-container bottom-button-container">
+                <button
+                  className="button bottom-button"
+                  onClick={() => dispatch({ type: RECIPE_ACTIONS.OPEN_MODAL })}
+                >
+                  SAVE
+                  <SaveOutlinedIcon
+                    style={{ fontSize: "1.1rem", marginLeft: "0.2rem" }}
+                  />
+                </button>
+                <button
+                  className="button bottom-button"
+                  onClick={() =>
+                    dispatch({
+                      type: RECIPE_ACTIONS.SET_EDIT_MODE,
+                      payload: false,
+                    })
+                  }
+                >
+                  CANCEL
+                </button>
+              </div>
             </>
           ) : (
             <>
               <h2 className="recipe-name">{recipe.name?.toUpperCase()}</h2>
+              <div className="label-tag-container">
+                {recipe.labels?.map((label) => (
+                  <span key={label} className="label-tag">
+                    {label}
+                  </span>
+                ))}
+              </div>
+
               <div className="ingredient-method">
                 <div className="ingredient-container">
                   <h3>Ingredients</h3>

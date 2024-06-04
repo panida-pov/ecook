@@ -1,10 +1,10 @@
 .recipe-content {
-  padding: 3rem 4rem;
+  padding: 7% 15%;
   width: 100%;
 }
 
 .add-recipe {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -22,4 +22,10 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(127, 127, 127, 0.7);
+}
+
+@media only screen and (max-width: 750px) {
+  .recipe-content {
+    padding: 6% 8%;
+  }
 }
