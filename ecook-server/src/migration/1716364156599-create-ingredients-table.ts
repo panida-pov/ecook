@@ -7,7 +7,7 @@ export class CreateIngredientsTable1716364156599 implements MigrationInterface {
         CREATE TABLE IF NOT EXISTS ingredients (
             id              BIGINT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
             name            VARCHAR(50) NOT NULL,
-            amount          BIGINT(10) NOT NULL,
+            amount          FLOAT(7,2) NOT NULL,
             unit            VARCHAR(50) NOT NULL,
             recipe_id       BIGINT(10),
             FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE

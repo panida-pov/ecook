@@ -114,8 +114,10 @@ export const createRecipeSchema: Schema = {
     isFloat: {
       options: {
         min: 0.01,
+        max: 99999.99,
       },
-      errorMessage: "Ingredient amount must be a number ( >=0.01 )",
+      errorMessage:
+        "Ingredient amount must be a number ( >=0.01 and <=99,999.99)",
     },
     customSanitizer: {
       options: (value) => Math.round(parseFloat(value) * 100) / 100,

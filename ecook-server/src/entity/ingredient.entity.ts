@@ -15,7 +15,7 @@ export class IngredientEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column("decimal", { precision: 7, scale: 2 })
   amount: number;
 
   @Column()
