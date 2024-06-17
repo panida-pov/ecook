@@ -76,3 +76,17 @@ Coming soon...
     #  ecook/ecook-client/
     $ npm start
     ```
+
+## Screenshots
+* Showing all recipes
+  ![all recipes](https://github.com/panida-pov/ecook/blob/main/screenshots/all_recipes.jpg?raw=true)
+* Editing certain recipe
+  ![edit recipe](https://github.com/panida-pov/ecook/blob/main/screenshots/edit_recipe.jpg?raw=true)
+* Creating a new recipe
+  ![create new recipe](https://github.com/panida-pov/ecook/blob/main/screenshots/new_recipe.jpg?raw=true)
+* Confirmation modal before proceeding
+  ![confirm modal](https://github.com/panida-pov/ecook/blob/main/screenshots/sample_modal.jpg?raw=true)
+* Select number of servings
+  ![select servings](https://github.com/panida-pov/ecook/blob/main/screenshots/select_servings.jpg?raw=true)
+* Filtering recipes by category
+  ![filter recipes](https://github.com/panida-pov/ecook/blob/main/screenshots/thai_recipes.jpg?raw=true)
