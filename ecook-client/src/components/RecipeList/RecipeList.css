@@ -1,7 +1,7 @@
 .recipe-list {
   margin: 2rem 0rem;
   padding: 0 1rem;
-  max-height: 25rem;
+  max-height: 20rem;
   overflow-y: auto;
 }
 

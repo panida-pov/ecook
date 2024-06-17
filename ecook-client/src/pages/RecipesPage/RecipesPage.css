@@ -3,6 +3,7 @@
   min-height: 78%;
   display: flex;
   position: relative;
+  height: fit-content;
 }
 
 .recipe-container {

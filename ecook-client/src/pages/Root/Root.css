@@ -3,6 +3,7 @@
   height: 100%;
   color: #404040;
   font-family: "Poppins", sans-serif;
+  overflow-y: auto;
 }
 
 button {
@@ -23,4 +24,10 @@ a {
 
 li {
   list-style: none;
+}
+
+@media only screen and (max-width: 750px) {
+  .root {
+    overflow: visible;
+  }
 }
