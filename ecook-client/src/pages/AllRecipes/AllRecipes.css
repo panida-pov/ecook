@@ -1,5 +1,5 @@
 .recipe-content {
-  padding: 7% 15%;
+  padding: 7% 12%;
   width: 100%;
 }
 
@@ -9,7 +9,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 16px;
+  width: 8px;
   border-radius: 8px;
   background: transparent;
   background: rgba(255, 255, 255, 0.4);
