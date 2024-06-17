@@ -87,6 +87,7 @@ td {
   height: 1.5rem;
   overflow-wrap: break-word;
   min-width: 65px;
+  vertical-align: top;
 }
 
 .text-highlight {

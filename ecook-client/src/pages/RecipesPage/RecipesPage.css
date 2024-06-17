@@ -1,7 +1,6 @@
 .outer-container {
-  margin: 3% 5%;
-  min-height: 80%;
-  height: fit-content;
+  margin: 2.5% 12%;
+  min-height: 78%;
   display: flex;
   position: relative;
 }
@@ -98,5 +97,20 @@
     flex-grow: 1;
     margin-bottom: 0;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .outer-container {
+    margin: 1.5% auto;
+    max-width: 1200px;
+  }
+
+  .recipe-container {
+    width: 88%;
+  }
+
+  .labels-container {
+    width: 12%;
   }
 }

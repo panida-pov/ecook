@@ -258,11 +258,18 @@ export const RecipePage = () => {
                       {recipe.ingredients?.map(({ amount, unit, name }) => {
                         return (
                           <tr key={name}>
-                            <td className="text-highlight">
+                            <td
+                              className="text-highlight"
+                              style={{ minWidth: "45px" }}
+                            >
                               {((amount / recipe.servings) * servings)
                                 .toFixed(2)
                                 .replace(/[.,]00$/, "")}
-                              &nbsp; &nbsp;
+                            </td>
+                            <td
+                              className="text-highlight"
+                              style={{ minWidth: "45px" }}
+                            >
                               {unit}
                             </td>
                             <td>{capitalize(name)}</td>

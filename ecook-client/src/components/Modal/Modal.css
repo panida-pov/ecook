@@ -52,6 +52,7 @@ body.active-modal {
   padding: 4px 0px;
   border-radius: 4px;
   background-color: #b3b3b3;
+  color: #404040 !important;
 }
 
 .ok {
