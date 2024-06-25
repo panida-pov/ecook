@@ -30,7 +30,8 @@ app.all("*", (req: Request, res: Response, next: NextFunction) =>
 );
 app.use(globalErrorHandler);
 
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log(`Server is Fire at port ${port}`);
+const port = parseInt(process.env.PORT || "8000");
+const ip = process.env.HOST_NAME || "127.0.0.1";
+app.listen(port, ip, () => {
+  console.log(`Server is Fire at https://${ip}:${port}`);
 });
