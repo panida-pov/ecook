@@ -2,7 +2,7 @@ import axios, { isAxiosError } from "axios";
 import { RecipeDto } from "../pages/RecipePage/type";
 import { RecipeListDto } from "../pages/RecipesPage/type";
 
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = process.env.REACT_APP_URL || "http://localhost:8000/api";
 
 interface LabelResponse {
   id: number;
