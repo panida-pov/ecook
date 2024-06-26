@@ -108,7 +108,7 @@ export const RecipeForm = (props: RecipeFormProps) => {
             placeholder="amt"
             autoComplete="off"
             min="0.01"
-            max="9999"
+            max="99999.99"
             defaultValue={ingredient.value.amount || ""}
             required={true}
             pattern="^\d*(\.\d{0,2})?$"

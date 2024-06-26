@@ -67,7 +67,7 @@
 
 .ingredient-container {
   width: 40%;
-  min-width: 180px;
+  min-width: 200px;
   flex-grow: 1;
   font-size: 0.9rem;
 }
@@ -86,10 +86,13 @@ table {
 }
 
 td {
-  height: 1.5rem;
   overflow-wrap: break-word;
-  min-width: 65px;
+  min-width: fit-content;
   vertical-align: top;
+  line-height: 1.2rem;
+  padding-right: 0.3rem;
+  padding-left: 0.3em;
+  padding-bottom: 0.3rem;
 }
 
 .text-highlight {
