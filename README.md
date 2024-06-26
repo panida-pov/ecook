@@ -2,7 +2,7 @@
 ***ECook*** is a fullstack web application which helps you take note of your cooking recipes anywhere and anytime!
 
 ## Live Demo: 
-Coming soon...
+https://ecook-client.onrender.com
 
 ## Built with
 * React + TypeScript
