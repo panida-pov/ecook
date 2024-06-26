@@ -9,3 +9,9 @@
   width: 88%;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 750px) {
+  .recipe-list {
+    max-height: 40rem;
+  }
+}

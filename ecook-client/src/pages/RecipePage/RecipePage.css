@@ -43,7 +43,7 @@
   letter-spacing: 0.05rem;
   background-color: #ffeb97;
   margin: 0.6rem 0;
-  padding: 0.5rem;
+  padding: 0.6rem;
   text-align: center;
 }
 
@@ -59,7 +59,7 @@
 .ingredient-method h3 {
   text-align: center;
   font-size: 1rem;
-  padding: 0.2rem;
+  padding: 0.5rem 0.2rem;
   margin-top: 0.6rem;
   margin-bottom: 1rem;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='white' stroke-width='2' stroke-dasharray='6' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
@@ -69,12 +69,14 @@
   width: 40%;
   min-width: 180px;
   flex-grow: 1;
+  font-size: 0.9rem;
 }
 
 .method-container {
   width: 52%;
   min-width: 200px;
   flex-grow: 1;
+  font-size: 0.9rem;
 }
 
 table {
@@ -107,7 +109,7 @@ td {
 }
 
 .method h4 {
-  margin: 0;
+  margin-bottom: 0.35rem;
 }
 
 .label-tag-container {
